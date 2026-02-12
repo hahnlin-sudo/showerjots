@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shower Jots — Never Lose a Shower Thought Again</title>
+  <meta name="description" content="Write in the shower. Find it on your phone. Shower Jots is a waterproof smart notepad that captures your ideas and syncs them automatically. Join the waitlist.">
+  <meta property="og:title" content="Shower Jots — Never Lose a Shower Thought Again">
+  <meta property="og:description" content="Write in the shower. Find it on your phone. A waterproof smart notepad for the ideas that can't wait.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://showerjots.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- 
+    ============================================
+    TRACKING PIXELS — Replace with your IDs
+    ============================================
+  -->
+
+  <!-- Google Analytics 4 -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+
+  <!-- Meta Pixel -->
+  <!--
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  -->
+
+  <!-- Reddit Pixel -->
+  <!--
+  <script>
+    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?
+    p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};
+    p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";
+    t.async=!0;var s=d.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(t,s)}}(window,document);
+    rdt('init','YOUR_PIXEL_ID');
+    rdt('track', 'PageVisit');
+  </script>
+  -->
+
+  <style>
+    /* ==========================================
+       CSS VARIABLES
+       ========================================== */
+    :root {
+      --bg-primary: #0A0A0C;
+      --bg-elevated: #111114;
+      --bg-card: #18181C;
+      --border-subtle: #222228;
+      --border-medium: #333338;
+      --text-primary: #F5F0EB;
+      --text-secondary: #9B9590;
+      --text-tertiary: #5E5A56;
+      --accent: #C8A455;
+      --accent-hover: #D9B96A;
+      --accent-muted: rgba(200, 164, 85, 0.12);
+      --accent-glow: rgba(200, 164, 85, 0.06);
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --max-width: 1120px;
+      --section-gap: clamp(80px, 12vw, 160px);
+    }
+
+    /* ==========================================
+       RESET & BASE
+       ========================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      overflow-x: hidden;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px;
+    }
+
+    ::selection {
+      background: rgba(200, 164, 85, 0.25);
+      color: var(--text-primary);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover { color: var(--accent-hover); }
+
+    img { max-width: 100%; display: block; }
+
+    /* ==========================================
+       LAYOUT
+       ========================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 48px);
+    }
+
+    section {
+      padding: var(--section-gap) 0;
+    }
+
+    /* ==========================================
+       TYPOGRAPHY
+       ========================================== */
+    .serif { font-family: var(--serif); }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text-primary);
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .section-heading {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.75;
+    }
+
+    /* ==========================================
+       SCROLL REVEAL ANIMATIONS
+       ========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ==========================================
+       NAVIGATION
+       ========================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 0;
+      transition: all 0.35s ease;
+    }
+    .nav.scrolled {
+      padding: 14px 0;
+      background: rgba(10, 10, 12, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 48px);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      color: var(--text-primary);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .nav-cta:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ==========================================
+       HERO
+       ========================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 60px;
+      position: relative;
+    }
+
+    /* Subtle radial glow behind hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content { max-width: 560px; }
+
+    .hero-tagline {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-tagline::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.08;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    /* ==========================================
+       EMAIL FORM
+       ========================================== */
+    .email-form {
+      display: flex;
+      gap: 12px;
+      max-width: 460px;
+    }
+    .email-form input[type="email"] {
+      flex: 1;
+      padding: 14px 20px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text-primary);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .email-form input[type="email"]::placeholder {
+      color: var(--text-tertiary);
+    }
+    .email-form input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+    .email-form button {
+      padding: 14px 28px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--bg-primary);
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .email-form button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(200, 164, 85, 0.25);
+    }
+
+    .form-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      padding: 16px 24px;
+      background: rgba(200, 164, 85, 0.08);
+      border: 1px solid rgba(200, 164, 85, 0.2);
+      border-radius: 10px;
+      max-width: 460px;
+    }
+    .form-success p {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ==========================================
+       IMAGE PLACEHOLDERS
+       ========================================== */
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border: 2px dashed var(--border-medium);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+    .image-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .image-placeholder svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--text-tertiary);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .image-placeholder span {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .image-placeholder.hero-image {
+      aspect-ratio: 3 / 4;
+      max-height: 560px;
+      border-radius: 20px;
+    }
+
+    .image-placeholder.wide {
+      aspect-ratio: 16 / 9;
+    }
+
+    .image-placeholder.square {
+      aspect-ratio: 1 / 1;
+    }
+
+    /* When actual images are added, this class replaces placeholder */
+    .image-actual {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .image-actual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==========================================
+       PROBLEM SECTION
+       ========================================== */
+    .problem {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .problem-text {
+      max-width: 680px;
+    }
+
+    .problem-quote {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--text-primary);
+      margin-top: 40px;
+      padding-left: 28px;
+      border-left: 2px solid var(--accent);
+    }
+
+    /* ==========================================
+       PRODUCT SECTION
+       ========================================== */
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* ==========================================
+       HOW IT WORKS
+       ========================================== */
+    .steps {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .step-card {
+      padding: 40px 32px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+    .step-card:hover {
+      border-color: var(--border-medium);
+    }
+
+    .step-number {
+      font-family: var(--serif);
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .step-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* connector lines between steps */
+    .steps-grid .step-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -17px;
+      width: 32px;
+      height: 1px;
+      background: var(--border-medium);
+    }
+
+    /* ==========================================
+       FEATURES
+       ========================================== */
+    .features {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .feature-card {
+      padding: 36px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      transition: border-color 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: var(--border-medium);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .feature-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--accent);
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .feature-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ==========================================
+       SOCIAL PROOF
+       ========================================== */
+    .proof {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .proof-stat {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .proof-number {
+      font-family: var(--serif);
+      font-size: clamp(48px, 8vw, 80px);
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .proof-label {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .proof-quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .proof-quote-card {
+      padding: 28px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+    .proof-quote-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .proof-quote-source {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    /* ==========================================
+       FINAL CTA
+       ========================================== */
+    .final-cta {
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .final-cta .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta .section-heading {
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .final-cta .section-body {
+      max-width: 500px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .final-cta .email-form {
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    /* ==========================================
+       FAQ
+       ========================================== */
+    .faq {
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .faq-list {
+      max-width: 680px;
+      margin: 48px auto 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 24px 0;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: color 0.2s ease;
+    }
+    .faq-question:hover { color: var(--accent); }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-tertiary);
+      stroke-width: 2;
+      fill: none;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-answer p {
+      padding-bottom: 24px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--text-tertiary);
+    }
+    .footer-logo span { color: var(--accent); opacity: 0.5; }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    /* ==========================================
+       RESPONSIVE
+       ========================================== */
+    @media (max-width: 900px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .hero-content { max-width: 100%; }
+      .image-placeholder.hero-image {
+        aspect-ratio: 4 / 3;
+        max-height: 400px;
+      }
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .step-card::after { display: none !important; }
+      .features-grid { grid-template-columns: 1fr; }
+      .proof-quotes {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .email-form {
+        flex-direction: column;
+      }
+      .email-form button {
+        width: 100%;
+        text-align: center;
+      }
+      .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">Shower Jots<span>.</span></div>
+      <button class="nav-cta" onclick="scrollToForm()">Get Early Access</button>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       HERO
+       ========================================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-tagline reveal">Coming 2026</div>
+          <h1 class="reveal reveal-delay-1">Never lose a <em>shower thought</em> again</h1>
+          <p class="hero-sub reveal reveal-delay-2">Write in the shower. Find it on your phone. Shower Jots is a waterproof notepad that captures your ideas the moment they arrive — and syncs them before you've finished drying off.</p>
+          <form class="email-form reveal reveal-delay-3" id="hero-form" onsubmit="handleSubmit(event, 'hero')">
+            <!--
+              Replace the action URL with your Kit (ConvertKit) form action.
+              Example: action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions"
+            -->
+            <input type="email" name="email_address" placeholder="Your email address" required>
+            <button type="submit">Get Early Access</button>
+          </form>
+          <div class="form-success" id="hero-success">
+            <p>You're on the list. We'll be in touch.</p>
+          </div>
+          <p class="form-note reveal reveal-delay-4">Be among the first to know. No spam, ever.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <!-- HERO IMAGE: Product concept render — device mounted on shower wall -->
+          <div class="image-placeholder hero-image" id="hero-image">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
+            <span>Product hero image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       THE PROBLEM
+       ========================================== -->
+  <section class="problem">
+    <div class="container">
+      <div class="problem-text">
+        <span class="section-label reveal">Sound familiar?</span>
+        <h2 class="section-heading reveal reveal-delay-1">Your best ideas don't wait for a pen.</h2>
+        <p class="section-body reveal reveal-delay-2">They come when your mind wanders — in the shower, half-asleep, mid-stride. And they vanish just as fast. By the time you reach for your phone, the thought is gone. Not the idea itself, but the way you had it. The exact phrasing. The clarity. That version is lost forever.</p>
+        <p class="problem-quote reveal reveal-delay-3">You don't forget the idea. You forget the version of it that was perfect.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       THE PRODUCT
+       ========================================== -->
+  <section class="product">
+    <div class="container">
+      <div class="product-layout">
+        <div>
+          <!-- PRODUCT IMAGE: Close-up of the device showing e-ink screen with handwriting -->
+          <div class="image-placeholder wide reveal" id="product-image">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
+            <span>Product detail image</span>
+          </div>
+        </div>
+        <div>
+          <span class="section-label reveal">What we're building</span>
+          <h2 class="section-heading reveal reveal-delay-1">Paper that remembers.</h2>
+          <p class="section-body reveal reveal-delay-2">Write naturally on a waterproof e-ink surface. It feels like paper, works under running water, and doesn't glow or buzz for your attention. Step out of the shower and your notes are already on your phone — organized, timestamped, ready.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       HOW IT WORKS
+       ========================================== -->
+  <section class="steps">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-label reveal">How it works</span>
+        <h2 class="section-heading reveal reveal-delay-1" style="max-width: 500px; margin: 0 auto 0;">Three steps. Zero friction.</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal reveal-delay-1">
+          <div class="step-number">01</div>
+          <h3 class="step-title">Jot it down</h3>
+          <p class="step-desc">Pick up the stylus and write. No buttons, no voice commands, no unlocking anything. Just handwriting on a surface that works under running water.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-2">
+          <div class="step-number">02</div>
+          <h3 class="step-title">Step out</h3>
+          <p class="step-desc">Your notes sync to your phone the moment you're in range. No tapping, no pairing, no thinking about it. It just happens.</p>
+        </div>
+        <div class="step-card reveal reveal-delay-3">
+          <div class="step-number">03</div>
+          <h3 class="step-title">It's on your phone</h3>
+          <p class="step-desc">Every idea, captured and timestamped. Send it to Apple Notes, Notion, Obsidian — or let it sit until you're ready to act on it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FEATURES
+       ========================================== -->
+  <section class="features">
+    <div class="container">
+      <span class="section-label reveal">Built for the shower</span>
+      <h2 class="section-heading reveal reveal-delay-1">Every detail, considered.</h2>
+      <div class="features-grid">
+
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">
+            <!-- Droplet icon -->
+            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"/></svg>
+          </div>
+          <h3 class="feature-title">Waterproof by design</h3>
+          <p class="feature-desc">IP68 rated. Steam, splashes, direct water contact. Built specifically for the one place your other devices can't go.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">
+            <!-- Pen icon -->
+            <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <h3 class="feature-title">Feels like paper</h3>
+          <p class="feature-desc">No glowing screen. No blue light. The calm, analog feel of writing by hand — with the permanence of something digital.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">
+            <!-- Bluetooth/sync icon -->
+            <svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/></svg>
+          </div>
+          <h3 class="feature-title">Syncs silently</h3>
+          <p class="feature-desc">Your notes show up in the companion app automatically. No cables, no buttons, no extra steps between your idea and your phone.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon">
+            <!-- Mount icon -->
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+          </div>
+          <h3 class="feature-title">Mounts in seconds</h3>
+          <p class="feature-desc">Industrial-grade suction cup grips any smooth surface. No drilling, no adhesive, no commitment. Moves with you if you move.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SOCIAL PROOF
+       ========================================== -->
+  <section class="proof">
+    <div class="container">
+      <div class="proof-stat reveal">
+        <div class="proof-number">25M+</div>
+        <p class="proof-label">members of r/ShowerThoughts — the internet's largest community built around the ideas that come when your mind wanders.</p>
+      </div>
+      <div class="proof-quotes">
+        <div class="proof-quote-card reveal reveal-delay-1">
+          <p class="proof-quote-text">"I had the perfect melody for a chorus this morning. By the time I got to my guitar, it was gone. Not the vibe — the actual melody. Just gone."</p>
+          <span class="proof-quote-source">— r/Songwriting</span>
+        </div>
+        <div class="proof-quote-card reveal reveal-delay-2">
+          <p class="proof-quote-text">"I've tried waterproof notepads, shouting at Alexa through the curtain, even a whiteboard marker on the glass. None of it actually works."</p>
+          <span class="proof-quote-source">— r/Productivity</span>
+        </div>
+        <div class="proof-quote-card reveal reveal-delay-3">
+          <p class="proof-quote-text">"My best thinking happens in the shower. My worst memory also happens in the shower. Cruel combination."</p>
+          <span class="proof-quote-source">— r/ShowerThoughts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       LIFESTYLE IMAGE BREAK
+       ========================================== -->
+  <section style="padding: 0;">
+    <div class="container">
+      <!-- LIFESTYLE IMAGE: Full-width atmospheric shot — steam, warm lighting, the contemplative shower moment -->
+      <div class="image-placeholder wide reveal" id="lifestyle-image" style="border-radius: 20px;">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
+        <span>Lifestyle / atmospheric image</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FINAL CTA
+       ========================================== -->
+  <section class="final-cta">
+    <div class="container">
+      <span class="section-label reveal">Be first</span>
+      <h2 class="section-heading reveal reveal-delay-1">Your ideas deserve to survive the shower.</h2>
+      <p class="section-body reveal reveal-delay-2">We're building Shower Jots right now. Join the waitlist and you'll be the first to know when it's ready — plus early access pricing before the public launch.</p>
+      <form class="email-form reveal reveal-delay-3" id="footer-form" onsubmit="handleSubmit(event, 'footer')">
+        <input type="email" name="email_address" placeholder="Your email address" required>
+        <button type="submit">Get Early Access</button>
+      </form>
+      <div class="form-success" id="footer-success">
+        <p>You're on the list. We'll be in touch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FAQ
+       ========================================== -->
+  <section class="faq">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-label reveal">Questions</span>
+        <h2 class="section-heading reveal reveal-delay-1">A few things</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How much will Shower Jots cost?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>We're targeting a retail price of $79–$99. Early waitlist members will have access to a discounted pre-order price before the general launch.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            When will it be available?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>We're aiming to begin shipping in late 2026 or early 2027. Waitlist members will be the first to know when pre-orders open.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Will it work with my phone?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>Yes. The companion app will be available on both iOS and Android. Notes sync via Bluetooth Low Energy, compatible with any modern smartphone.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Is my data private?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>Absolutely. Your notes are encrypted end-to-end and stored only on your device and your personal cloud account. We never see, read, or sell your ideas.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How is this different from waterproof notepads?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>Waterproof paper works for writing, but your notes stay trapped on a pad you'll eventually lose or forget about. Shower Jots sends everything to your phone automatically — so your ideas end up where the rest of your life is organized.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How long does the battery last?
+            <svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-answer"><p>We're targeting weeks of battery life on a single charge, thanks to the e-ink display's ultra-low power draw. It charges via a magnetic USB-C dock that sits outside the shower.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">Shower Jots<span>.</span></div>
+        <div class="footer-links">
+          <a href="mailto:hello@showerjots.com">Contact</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll to form
+    function scrollToForm() {
+      document.getElementById('hero-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        document.querySelector('#hero-form input[type="email"]').focus();
+      }, 600);
+    }
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Open clicked (if it wasn't already open)
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Form submission handler
+    // For Kit (ConvertKit) integration, replace the fetch URL with your Kit form endpoint
+    function handleSubmit(e, formId) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('input[type="email"]').value;
+
+      /*
+        ============================================
+        KIT (CONVERTKIT) INTEGRATION
+        ============================================
+        Replace the URL below with your Kit form's API endpoint.
+        
+        Example:
+        fetch('https://app.kit.com/forms/YOUR_FORM_ID/subscriptions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email_address: email,
+            tags: ['waitlist', 'landing-page']
+          })
+        })
+        .then(response => response.json())
+        .then(data => { ... })
+        .catch(error => { ... });
+      */
+
+      // Placeholder: show success state (remove this once Kit is connected)
+      form.style.display = 'none';
+      document.getElementById(formId + '-success').style.display = 'block';
+
+      // Fire conversion pixels
+      // Meta: fbq('track', 'Lead');
+      // Reddit: rdt('track', 'SignUp');
+      // GA4: gtag('event', 'email_signup', { method: formId });
+
+      console.log('Email submitted:', email, 'from:', formId);
+    }
+  </script>
+
+</body>
+</html>
