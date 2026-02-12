@@ -459,6 +459,15 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
+    }
+    .image-actual.hero-image {
+      aspect-ratio: 3 / 4;
+      max-height: 560px;
+      border-radius: 20px;
+    }
+    .image-actual.wide {
+      aspect-ratio: 16 / 9;
     }
 
     /* ==========================================
@@ -801,7 +810,8 @@
         gap: 48px;
       }
       .hero-content { max-width: 100%; }
-      .image-placeholder.hero-image {
+      .image-placeholder.hero-image,
+      .image-actual.hero-image {
         aspect-ratio: 4 / 3;
         max-height: 400px;
       }
@@ -869,10 +879,8 @@
           <p class="form-note reveal reveal-delay-4">Be among the first to know. No spam, ever.</p>
         </div>
         <div class="reveal reveal-delay-2">
-          <!-- HERO IMAGE: Product concept render — device mounted on shower wall -->
-          <div class="image-placeholder hero-image" id="hero-image">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
-            <span>Product hero image</span>
+          <div class="image-actual hero-image" id="hero-image">
+            <img src="images/hero.png" alt="Shower Jots device mounted on shower wall with handwritten notes on the e-ink screen" loading="eager">
           </div>
         </div>
       </div>
@@ -900,10 +908,8 @@
     <div class="container">
       <div class="product-layout">
         <div>
-          <!-- PRODUCT IMAGE: Close-up of the device showing e-ink screen with handwriting -->
-          <div class="image-placeholder wide reveal" id="product-image">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
-            <span>Product detail image</span>
+          <div class="image-actual wide reveal" id="product-image">
+            <img src="images/detail.png" alt="Close-up of Shower Jots e-ink screen showing handwritten songwriting notes with stylus and water droplets" loading="lazy">
           </div>
         </div>
         <div>
@@ -1024,10 +1030,8 @@
        ========================================== -->
   <section style="padding: 0;">
     <div class="container">
-      <!-- LIFESTYLE IMAGE: Full-width atmospheric shot — steam, warm lighting, the contemplative shower moment -->
-      <div class="image-placeholder wide reveal" id="lifestyle-image" style="border-radius: 20px;">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M3 21l6-6 4 4 4-5 4 4"/></svg>
-        <span>Lifestyle / atmospheric image</span>
+      <div class="image-actual wide reveal" id="lifestyle-image" style="border-radius: 20px; overflow: hidden;">
+        <img src="images/lifestyle.png" alt="Atmospheric view through steamy shower glass door with warm golden light" loading="lazy">
       </div>
     </div>
   </section>
